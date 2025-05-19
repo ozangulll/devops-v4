@@ -3,3 +3,4 @@ COPY target/devops-4-0.0.1-SNAPSHOT.jar app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
 #testt
 #test2
+#testtt

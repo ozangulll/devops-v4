@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'ozangulll/devops-v4-try:latest'
+        DOCKER_IMAGE = 'ozangulll/devops-v4:latest'
         DOCKER_CREDENTIALS_ID = 'dockerhub-creds'
     }
 
@@ -14,7 +14,7 @@ pipeline {
         stage('Build with Maven') {
             steps {
                 git 'https://github.com/ozangulll/devops-v4'
-                sh './mvnw clean package'
+                sh 'mvn clean package'
             }
         }
 
@@ -38,15 +38,20 @@ pipeline {
             }
         }
 
-        stage('Deploy to Kubernetes') {
+        stage('Deploy to Kubernetes - Deployment') {
             steps {
                 withCredentials([file(credentialsId: 'kubeconfig-id', variable: 'KUBECONFIG')]) {
                     sh 'kubectl apply -f k8s/deployment.yaml'
-            sh 'kubectl apply -f k8s/service.yaml'
+                }
+            }
         }
-    }
-}
 
-
+        stage('Deploy to Kubernetes - Service') {
+            steps {
+                withCredentials([file(credentialsId: 'kubeconfig-id', variable: 'KUBECONFIG')]) {
+                    sh 'kubectl apply -f k8s/service.yaml'
+                }
+            }
+        }
     }
 }

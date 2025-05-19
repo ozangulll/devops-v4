@@ -1,11 +1,11 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: devops-v4-kubernetes
+  name: devops-v4-service
 spec:
   type: NodePort
   selector:
-    app: devops-v4-kubernetes
+    app: devops-v4-deployment
   ports:
     - protocol: TCP
       port: 8080

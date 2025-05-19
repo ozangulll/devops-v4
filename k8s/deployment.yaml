@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: devops-v4-kubernetes
+  name: devops-v4-deployment
   labels:
-    app: devops-v4-kubernetes
+    app: devops-v4-deployment
 spec:
   selector:
     matchLabels:
-      app: devops-v4-kubernetes
+      app: devops-v4-deployment
   replicas: 1
   template:
     metadata:
-      name: devops-v4-kubernetes
+      name: devops-v4-deployment
       labels:
-        app: devops-v4-kubernetes
+        app: devops-v4-deployment
     spec:
       containers:
-        - name: devops-v4-kubernetes
+        - name: devops-v4-deployment
           image: docker.io/ozangulll/devops-v4-try
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080

@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: devops-v4-deployment
-          image: docker.io/ozangulll/devops-v4-try
+          image: docker.io/ozangulll/devops-v4
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

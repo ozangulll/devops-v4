@@ -11,14 +11,14 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('Build with Maven') {
             steps {
                 git 'https://github.com/ozangulll/devops-v4'
                 sh './mvnw clean package'
             }
         }
 
-        stage('Docker Build') {
+        stage('Docker Build an Image') {
             steps {
                 sh "docker build -t ${DOCKER_IMAGE} ."
             }
@@ -37,5 +37,18 @@ pipeline {
                 sh "docker push ${DOCKER_IMAGE}"
             }
         }
+
+        stage('Deploy to Kubernetes - Deployment') {
+            steps {
+                sh 'kubectl apply -f k8s/deployment.yaml'
+            }
+        }
+
+        stage('Deploy to Kubernetes - Service') {
+            steps {
+                sh 'kubectl apply -f k8s/service.yaml'
+            }
+        }
+
     }
 }

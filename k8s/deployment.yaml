@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: devops-v4-deployment
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       name: devops-v4-deployment
